@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 const passwordValidation = new RegExp(
   "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
 );
@@ -119,15 +120,29 @@ const SignUp = ({ className }: { className?: string }) => {
           />
           <Button type="submit" className="w-full">
             Create Account
-          </Button >
+          </Button>
         </form>
       </Form>
-      <div className="flex ">
+      <div className="flex  text-muted-foreground">
         <Switch />
-        <h1 className="ml-3">
-          I agree to the <span className="underline"> Terms & Conditions </span>{" "}
-          and <span className="underline">Privacy Policy</span>
-        </h1>
+        <p className="ml-3 ">
+          I agree to the{" "}
+          <Link
+            href="#"
+            className="underline hover:text-primary cursor-pointer"
+          >
+            {" "}
+            Terms & Conditions{" "}
+          </Link>{" "}
+          and{" "}
+          <Link
+            href="#"
+            className="underline hover:text-primary cursor-pointer"
+          >
+            {" "}
+            Privacy policy{" "}
+          </Link>{" "}
+        </p>
       </div>
     </div>
   );

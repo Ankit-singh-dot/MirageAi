@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import LoginForm from "./LoginForm";
 import { Button } from "../ui/button";
 import SignUp from "./SignupForm";
+import ResetForm from "./ResetPassword";
 const AuthForm = () => {
   const [mode, setMode] = useState("login");
   return (
@@ -20,7 +21,7 @@ const AuthForm = () => {
 
         <p className="text-sm text-muted-foreground">
           {mode === "reset"
-            ? "Enter your email below to reset your Password"
+            ? "Enter your email address and we'll send you a link to reset your password"
             : mode === "login"
             ? "Enter your email below to login to your account "
             : "Get started with your professional AI headshots "}
@@ -55,14 +56,29 @@ const AuthForm = () => {
               variant={"link"}
               className="p-0"
               onClick={() => setMode("login")}
-              
             >
               Already have account ? Log up
             </Button>
           </div>
         </>
       )}
-      {mode === "reset" && <span>ResetForm</span>}
+      {mode === "reset" && (
+        <>
+          <ResetForm />
+          <div className="text-center ">
+            <Button
+              variant={"link"}
+              className="p-0"
+              onClick={() => setMode("login")}
+            >
+              <span className="no-underline text-gray-500">
+                {" "}
+                Remember your password? Sign in{" "}
+              </span>{" "}
+            </Button>
+          </div>
+        </>
+      )}
     </div>
   );
 };
