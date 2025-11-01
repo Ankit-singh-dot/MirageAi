@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import AuthImg from "@/public/Abstract Curves and Colors.jpg";
 import Logo from "@/components/Logo";
+import AuthForm from "@/components/authentication/AuthForm";
 const page = () => {
   return (
     <div className="h-screen grid grid-cols-2 relative">
@@ -23,16 +24,20 @@ const page = () => {
         <div className="relative z-20 mt-auto mb-7 px-6">
           <blockquote className="space-y-2">
             <p className="text-lg">
-              Mirage AI is a game changer for me. I have been able to generate
-              high quality professional headshots within minutes. It has saved
-              me countless hours of work and cost as well.
+              I asked Mirage AI for a professional headshot. It made me look
+              like I actually get 8 hours of sleep and drink water. Unreal
+              technology.
             </p>
             <footer className="text-sm">Bhonduu</footer>
           </blockquote>
         </div>
       </div>
 
-      <div></div>
+      <div className="items-center flex relative flex-col justify-center  h-full w-[350px] mx-auto">
+        <div className="max-w-xl w-[350px] mx-auto">
+          <AuthForm />
+        </div>
+      </div>
     </div>
   );
 };
