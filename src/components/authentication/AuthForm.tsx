@@ -3,6 +3,7 @@ import { space } from "postcss/lib/list";
 import React, { useState } from "react";
 import LoginForm from "./LoginForm";
 import { Button } from "../ui/button";
+import SignUp from "./SignupForm";
 const AuthForm = () => {
   const [mode, setMode] = useState("login");
   return (
@@ -22,7 +23,7 @@ const AuthForm = () => {
             ? "Enter your email below to reset your Password"
             : mode === "login"
             ? "Enter your email below to login to your account "
-            : "Enter your information below to create your account "}
+            : "Get started with your professional AI headshots "}
         </p>
       </div>
       {mode === "login" && (
@@ -46,7 +47,21 @@ const AuthForm = () => {
           </div>
         </>
       )}
-      {mode === "signup" && <span>SignUpForm</span>}
+      {mode === "signup" && (
+        <>
+          <SignUp />
+          <div className="text-center ">
+            <Button
+              variant={"link"}
+              className="p-0"
+              onClick={() => setMode("login")}
+              
+            >
+              Already have account ? Log up
+            </Button>
+          </div>
+        </>
+      )}
       {mode === "reset" && <span>ResetForm</span>}
     </div>
   );
