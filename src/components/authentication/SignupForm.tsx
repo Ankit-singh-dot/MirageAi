@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useId, useState } from "react";
 import { email, string, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -17,6 +17,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 const passwordValidation = new RegExp(
   "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
 );
@@ -44,6 +46,8 @@ const formSchema = z
     path: ["confirmPassword"],
   });
 const SignUp = ({ className }: { className?: string }) => {
+  const [loading, setLoading] = useState(false);
+  const toastId = useId();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -52,6 +56,8 @@ const SignUp = ({ className }: { className?: string }) => {
     },
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
+    toast.loading("Signing Up .... ", { id: toastId });
+    setLoading(true);
     console.log(values);
   }
   return (
@@ -118,7 +124,8 @@ const SignUp = ({ className }: { className?: string }) => {
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full" disabled={loading}>
+            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Create Account
           </Button>
         </form>
