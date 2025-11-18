@@ -1,6 +1,6 @@
 "use client";
 import React, { useId, useState } from "react";
-import { email, string, z } from "zod";
+import {  z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -19,6 +19,10 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { signup } from "@/actions/auth-action";
+// import { fa, id } from "zod/v4/locales"; 
+import { useRouter } from "next/navigation";
+
 const passwordValidation = new RegExp(
   "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
 );
@@ -46,6 +50,7 @@ const formSchema = z
     path: ["confirmPassword"],
   });
 const SignUp = ({ className }: { className?: string }) => {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const toastId = useId();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -55,9 +60,25 @@ const SignUp = ({ className }: { className?: string }) => {
       password: "",
     },
   });
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     toast.loading("Signing Up .... ", { id: toastId });
     setLoading(true);
+    const formData = new FormData();
+    formData.append("full_name", values.full_name);
+    formData.append("email", values.email);
+    formData.append("password", values.password);
+    const { success, error } = await signup(formData);
+    if (!success) {
+      toast.error(String(error), { id: toastId });
+      setLoading(false);
+    } else {
+      toast.success(
+        "signed up successfully! please confirm your email address ",
+        { id: toastId }
+      );
+      router.push("/login");
+    }
+    setLoading(false);
     console.log(values);
   }
   return (
