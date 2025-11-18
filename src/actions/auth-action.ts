@@ -15,7 +15,7 @@ export async function signup(formdata: FormData): Promise<AuthResponse> {
     options: {
       data: {
         full_name: formdata.get("full_name") as string,
-      }
+      },
     },
   };
 
@@ -23,6 +23,33 @@ export async function signup(formdata: FormData): Promise<AuthResponse> {
 
   return {
     error: error?.message || "there was error while signing up",
+    success: !error,
+    data: signupData || null,
+  };
+}
+
+("use server");
+
+import { createClient } from "@/lib/supabase/server";
+
+interface AuthResponse {
+  error: null | string;
+  success: boolean;
+  data: unknown | null;
+}
+export async function login(formdata: FormData): Promise<AuthResponse> {
+  const supabase = await createClient();
+  const data = {
+    email: formdata.get("email") as string,
+    password: formdata.get("password") as string,
+  };
+
+  const { data: signupData, error } = await supabase.auth.signInWithPassword(
+    data
+  );
+
+  return {
+    error: error?.message || "there was error while logging up",
     success: !error,
     data: signupData || null,
   };
