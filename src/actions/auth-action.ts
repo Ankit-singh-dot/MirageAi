@@ -28,10 +28,6 @@ export async function signup(formdata: FormData): Promise<AuthResponse> {
   };
 }
 
-("use server");
-
-import { createClient } from "@/lib/supabase/server";
-
 interface AuthResponse {
   error: null | string;
   success: boolean;
@@ -44,13 +40,13 @@ export async function login(formdata: FormData): Promise<AuthResponse> {
     password: formdata.get("password") as string,
   };
 
-  const { data: signupData, error } = await supabase.auth.signInWithPassword(
+  const { data: signInData, error } = await supabase.auth.signInWithPassword(
     data
   );
 
   return {
     error: error?.message || "there was error while logging up",
     success: !error,
-    data: signupData || null,
+    data: signInData || null,
   };
 }
