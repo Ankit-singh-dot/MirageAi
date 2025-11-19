@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { useRouter } from "next/navigation";
 
 interface AuthResponse {
   error: null | string;
@@ -49,4 +50,15 @@ export async function login(formdata: FormData): Promise<AuthResponse> {
     success: !error,
     data: signInData || null,
   };
+}
+interface AuthResponse {
+  error: null | string;
+  success: boolean;
+  data: unknown | null;
+}
+export async function logout(): Promise<void> {
+  const router = useRouter();
+  const supabase = await createClient();
+  await supabase.auth.signOut();
+  router.push("/login");
 }
