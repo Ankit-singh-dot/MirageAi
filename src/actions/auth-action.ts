@@ -56,7 +56,7 @@ interface AuthResponse {
   success: boolean;
   data: unknown | null;
 }
-export async function logout(): Promise<void> {
+export async function logout(formdata:FormData): Promise<void> {
   const router = useRouter();
   const supabase = await createClient();
   await supabase.auth.signOut();
