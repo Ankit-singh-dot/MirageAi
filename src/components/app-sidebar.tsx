@@ -23,6 +23,10 @@ export async function AppSidebar({
   const supabase = await createClient();
   const { data } = await supabase.auth.getUser();
   console.log(data);
+  const user = {
+    name: data.user?.user_metadata.full_name,
+    email: data.user?.user_metadata.email,
+  };
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -45,7 +49,9 @@ export async function AppSidebar({
         <NavMain />
         {/* <NavProjects projects={data.projects} /> */}
       </SidebarContent>
-      <SidebarFooter>{/* <NavUser user={data.user} /> */}</SidebarFooter>
+      <SidebarFooter>
+        <NavUser user={user} />
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );
