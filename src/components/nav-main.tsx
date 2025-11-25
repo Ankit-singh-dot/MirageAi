@@ -18,6 +18,8 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 export function NavMain({
   items,
@@ -33,6 +35,7 @@ export function NavMain({
     }[];
   }[];
 }) {
+  const pathName = usePathname();
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
@@ -40,7 +43,15 @@ export function NavMain({
         {items.map((item) => (
           <Link key={item.title} href={item.url} className="rounded-none">
             <SidebarMenuItem>
-              <SidebarMenuButton tooltip={item.title}>
+              <SidebarMenuButton
+                tooltip={item.title}
+                className={cn(
+                  "rounded-none",
+                  pathName === item.url
+                    ? "text-primary bg-primary/5 rounded"
+                    : "text-muted-foreground"
+                )}
+              >
                 {item.icon && <item.icon />}
                 <span>{item.title}</span>
                 <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
