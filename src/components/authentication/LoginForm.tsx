@@ -48,7 +48,7 @@ const LoginForm = ({ className }: { className?: string }) => {
       toast.error(String(error), { id: toastId });
       setLoading(false);
     } else {
-      toast.success("Signup done. Don’t ghost—go verify  ", { id: toastId });
+      toast.success("Signup done. Don’t ghost  ", { id: toastId });
       router.push("/dashboard");
     }
     setLoading(false);

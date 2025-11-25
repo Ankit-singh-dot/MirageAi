@@ -24,11 +24,10 @@ const page = () => {
         <div className="relative z-20 mt-auto mb-7 px-6">
           <blockquote className="space-y-2">
             <p className="text-lg">
-              I asked Mirage AI for a professional headshot. It made me look
-              like I actually get 8 hours of sleep and drink water. Unreal
-              technology.
+              Mirage AI gave me a headshot that looks like I moisturize,
+              meditate, and don’t have emotional damage. I almost believed it
             </p>
-            <footer className="text-sm">Bhonduu</footer>
+            <footer className="text-sm"></footer>
           </blockquote>
         </div>
       </div>
