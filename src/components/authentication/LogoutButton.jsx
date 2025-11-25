@@ -10,7 +10,7 @@ export const LogoutButton = () => {
       onClick={handleLogout}
       className="inline-block w-full cursor-pointer text-destructive"
     >
-      logout-btn
+      Logout
     </span>
   );
 };

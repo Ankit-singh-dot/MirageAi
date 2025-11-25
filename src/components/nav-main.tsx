@@ -79,7 +79,7 @@ export function NavMain() {
   const pathName = usePathname();
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      {/* <SidebarGroupLabel>Platform</SidebarGroupLabel> */}
       <SidebarMenu>
         {navItems.map((item) => (
           <Link key={item.title} href={item.url} className="rounded-none">
