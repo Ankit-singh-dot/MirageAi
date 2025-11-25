@@ -1,7 +1,25 @@
 "use client";
 
 import { ChevronRight, type LucideIcon } from "lucide-react";
-
+import {
+  AudioWaveform,
+  BookOpen,
+  Bot,
+  ChevronsUpDown,
+  Command,
+  CreditCard,
+  Frame,
+  FrameIcon,
+  GalleryVerticalEnd,
+  Image,
+  Images,
+  Layers,
+  Map,
+  PieChart,
+  Settings2,
+  Sparkle,
+  SquareTerminal,
+} from "lucide-react";
 import {
   Collapsible,
   CollapsibleContent,
@@ -20,27 +38,50 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-
-export function NavMain({
-  items,
-}: {
-  items: {
-    title: string;
-    url: string;
-    icon?: LucideIcon;
-    isActive?: boolean;
-    items?: {
-      title: string;
-      url: string;
-    }[];
-  }[];
-}) {
+const navItems = [
+  {
+    title: "Dashboard",
+    url: "/dashboard",
+    icon: SquareTerminal,
+  },
+  {
+    title: "Generate Image",
+    url: "/image-generation",
+    icon: Image,
+  },
+  {
+    title: "Train Model",
+    url: "/model-training ",
+    icon: Layers,
+  },
+  {
+    title: "My Images",
+    url: "/gallery",
+    icon: Images,
+  },
+  {
+    title: "Billing",
+    url: "/billing",
+    icon: CreditCard,
+  },
+  {
+    title: "My models",
+    url: "/models",
+    icon: Frame,
+  },
+  {
+    title: "Setting",
+    url: "/account-settings",
+    icon: Settings2,
+  },
+];
+export function NavMain() {
   const pathName = usePathname();
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item) => (
+        {navItems.map((item) => (
           <Link key={item.title} href={item.url} className="rounded-none">
             <SidebarMenuItem>
               <SidebarMenuButton
